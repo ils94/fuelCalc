@@ -6,49 +6,51 @@ function calculateCost() {
     const distance = parseFloat(document.getElementById('distance').value) || 1;
 
     const resultDiv = document.getElementById('result');
-    resultDiv.classList.add('hidden'); // Hide result initially
+    resultDiv.classList.add('hidden'); // Esconde o resultado inicialmente
 
     if (!gasolinePrice || !alcoholPrice || !gasolineKm || !alcoholKm) {
         resultDiv.innerHTML = `<div class="message">Preencha os campos necessários!</div>`;
-        resultDiv.classList.remove('hidden'); // Show result with error message
+        resultDiv.classList.remove('hidden'); // Exibe mensagem de erro
         return;
     }
 
+    // Verifica se o álcool é viável pelo preço
     const alcoholIsViableByPrice = alcoholPrice <= 0.7 * gasolinePrice;
 
-    // Perform calculations for both options
+    // Calcula o custo por km
     const gasolineCostPerKm = gasolinePrice / gasolineKm;
     const alcoholCostPerKm = alcoholPrice / alcoholKm;
 
     const totalGasolineCost = gasolineCostPerKm * distance;
     const totalAlcoholCost = alcoholCostPerKm * distance;
 
-    // Determine the better option
+    // Determina a melhor opção
     let cheaperOption = "";
-    if (alcoholIsViableByPrice) {
+
+    if (alcoholIsViableByPrice && alcoholCostPerKm < gasolineCostPerKm) {
         cheaperOption = `
-            Álcool é melhor levando em consideração a 
-            <a href="https://www.rotaexata.com.br/blog/etanol/#:~:text=Basta%20fazer%20um%20c%C3%A1lculo%20b%C3%A1sico,70%25%20do%20pre%C3%A7o%20da%20gasolina." target="_blank" rel="noopener noreferrer">regra dos 70%</a>.
+        Álcool é melhor levando em consideração a
+        <a href="https://autopapo.com.br/noticia/porcentagem-gasolina-ou-etanol/" target="_blank" rel="noopener noreferrer">regra dos 75%</a>.
         `;
     } else {
         cheaperOption = `
-            Gasolina é melhor levando em consideração a 
-            <a href="https://www.rotaexata.com.br/blog/etanol/#:~:text=Basta%20fazer%20um%20c%C3%A1lculo%20b%C3%A1sico,70%25%20do%20pre%C3%A7o%20da%20gasolina." target="_blank" rel="noopener noreferrer">regra dos 70%</a>.
+        Gasolina é melhor levando em consideração a
+        <a href="https://autopapo.com.br/noticia/porcentagem-gasolina-ou-etanol/" target="_blank" rel="noopener noreferrer">regra dos 75%</a>.
         `;
     }
 
-    // Display results
+    // Exibe os resultados
     resultDiv.innerHTML = `
-        <h2>Resultado do Cálculo</h2>
-        <div class="fuel-type${alcoholIsViableByPrice ? "" : " highlight"}">
-            <div class="name">Gasolina:</div>
-            <div class="cost">Custo por KM: R\$ ${gasolineCostPerKm.toFixed(2)}<br>Total: R\$ ${totalGasolineCost.toFixed(2)}</div>
-        </div>
-        <div class="fuel-type${alcoholIsViableByPrice ? " highlight" : ""}">
-            <div class="name">Álcool:</div>
-            <div class="cost">Custo por KM: R\$ ${alcoholCostPerKm.toFixed(2)}<br>Total: R\$ ${totalAlcoholCost.toFixed(2)}</div>
-        </div>
-        <div class="message">${cheaperOption}</div>
+    <h2>Resultado do Cálculo</h2>
+    <div class="fuel-type${alcoholIsViableByPrice && alcoholCostPerKm < gasolineCostPerKm ? "" : " highlight"}">
+    <div class="name">Gasolina:</div>
+    <div class="cost">Custo por KM: R\$ ${gasolineCostPerKm.toFixed(2)}<br>Total: R\$ ${totalGasolineCost.toFixed(2)}</div>
+    </div>
+    <div class="fuel-type${alcoholIsViableByPrice && alcoholCostPerKm < gasolineCostPerKm ? " highlight" : ""}">
+    <div class="name">Álcool:</div>
+    <div class="cost">Custo por KM: R\$ ${alcoholCostPerKm.toFixed(2)}<br>Total: R\$ ${totalAlcoholCost.toFixed(2)}</div>
+    </div>
+    <div class="message">${cheaperOption}</div>
     `;
-    resultDiv.classList.remove('hidden'); // Show result after calculation
+    resultDiv.classList.remove('hidden'); // Mostra o resultado
 }
