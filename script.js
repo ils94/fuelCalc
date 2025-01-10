@@ -25,13 +25,15 @@ function calculateCost() {
 
     const alcoholIsViableByEfficiency = alcoholPrice <= efficiency * gasolinePrice;
 
+    const alcoholValueMax = gasolinePrice * efficiency;
+
     // Determina a melhor opção
     let cheaperOption = "";
 
     if (alcoholIsViableByEfficiency) {
-        cheaperOption = `O etanol é a opção mais vantajosa, considerando seu preço e o rendimento de ${efficiency*100}% que este carro alcança com seu uso.`;
+        cheaperOption = `O etanol é a escolha mais vantajosa para este carro, graças ao seu custo-benefício e rendimento de ${efficiency*100}%. O preço máximo recomendado para o etanol é de R\$  ${alcoholValueMax.toFixed(2)}`;
     } else {
-        cheaperOption = `A gasolina é a opção mais vantajosa, considerando seu preço e o rendimento de ${efficiency*100}% que este carro alcança com o uso do etanol.`;
+        cheaperOption = `A gasolina é a opção mais vantajosa, considerando seu preço e o rendimento de ${efficiency*100}% que o carro oferece ao utilizar etanol. O preço máximo recomendado para o etanol neste caso é de: R\$ ${alcoholValueMax.toFixed(2)}`;
     }
 
     // Exibe os resultados
