@@ -35,7 +35,7 @@ if (alcoholIsViableByPrice) {
 
     // Display results
     document.getElementById('result').innerHTML = `
-        <h2>Calculation Results</h2>
+        <h2>Resultado do Cálculo</h2>
         <div class="fuel-type${alcoholIsViableByPrice ? "" : " highlight"}">
             <div class="name">Gasolina:</div>
             <div class="cost">Custo por KM: R${gasolineCostPerKm.toFixed(2)}<br>Total: $${totalGasolineCost.toFixed(2)}</div>
