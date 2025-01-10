@@ -14,9 +14,6 @@ function calculateCost() {
         return;
     }
 
-    // Verifica se o álcool é viável pelo preço
-    const alcoholIsViableByPrice = alcoholPrice <= 0.75 * gasolinePrice;
-
     // Calcula o custo por km
     const gasolineCostPerKm = gasolinePrice / gasolineKm;
     const alcoholCostPerKm = alcoholPrice / alcoholKm;
@@ -24,29 +21,32 @@ function calculateCost() {
     const totalGasolineCost = gasolineCostPerKm * distance;
     const totalAlcoholCost = alcoholCostPerKm * distance;
 
+    // Aplica a regra dos 75%
+    const alcoholIsViableByEfficiency = alcoholCostPerKm <= 0.75 * gasolineCostPerKm;
+
     // Determina a melhor opção
     let cheaperOption = "";
 
-    if (alcoholIsViableByPrice && alcoholCostPerKm < gasolineCostPerKm) {
+    if (alcoholIsViableByEfficiency) {
         cheaperOption = `
         Álcool é melhor levando em consideração a
-        <a href="https://autopapo.com.br/noticia/porcentagem-gasolina-ou-etanol/" target="_blank" rel="noopener noreferrer">regra dos 75%</a>.
+        eficiência do consumo e a regra dos 75%.
         `;
     } else {
         cheaperOption = `
         Gasolina é melhor levando em consideração a
-        <a href="https://autopapo.com.br/noticia/porcentagem-gasolina-ou-etanol/" target="_blank" rel="noopener noreferrer">regra dos 75%</a>.
+        eficiência do consumo e a regra dos 75%.
         `;
     }
 
     // Exibe os resultados
     resultDiv.innerHTML = `
     <h2>Resultado do Cálculo</h2>
-    <div class="fuel-type${alcoholIsViableByPrice && alcoholCostPerKm < gasolineCostPerKm ? "" : " highlight"}">
+    <div class="fuel-type${alcoholIsViableByEfficiency ? "" : " highlight"}">
     <div class="name">Gasolina:</div>
     <div class="cost">Custo por KM: R\$ ${gasolineCostPerKm.toFixed(2)}<br>Total: R\$ ${totalGasolineCost.toFixed(2)}</div>
     </div>
-    <div class="fuel-type${alcoholIsViableByPrice && alcoholCostPerKm < gasolineCostPerKm ? " highlight" : ""}">
+    <div class="fuel-type${alcoholIsViableByEfficiency ? " highlight" : ""}">
     <div class="name">Álcool:</div>
     <div class="cost">Custo por KM: R\$ ${alcoholCostPerKm.toFixed(2)}<br>Total: R\$ ${totalAlcoholCost.toFixed(2)}</div>
     </div>
