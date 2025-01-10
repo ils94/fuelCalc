@@ -4,35 +4,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fuel Cost Calculator</title>
+  <title>Calculadora de Custo de Combustível</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
   <div class="container">
-    <h1>Fuel Cost Calculator</h1>
+    <h1>Calculadora de Custo de Combustível</h1>
     <div>
       <div class="form-group">
-        <label for="gasolinePrice">Gasoline Price (per liter):</label>
+        <label for="gasolinePrice">Preço da Gasolina (por litro):</label>
         <input type="number" id="gasolinePrice" step="0.01" required>
       </div>
       <div class="form-group">
-        <label for="alcoholPrice">Alcohol Price (per liter):</label>
+        <label for="alcoholPrice">Preço do Álcool (por litro):</label>
         <input type="number" id="alcoholPrice" step="0.01" required>
       </div>
       <div class="form-group">
-        <label for="gasolineKm">Kilometers per liter (Gasoline):</label>
+        <label for="gasolineKm">KM por litro (Gasolina):</label>
         <input type="number" id="gasolineKm" step="0.1" required>
       </div>
       <div class="form-group">
-        <label for="alcoholKm">Kilometers per liter (Alcohol):</label>
+        <label for="alcoholKm">KM por litro (Álcool):</label>
         <input type="number" id="alcoholKm" step="0.1" required>
       </div>
       <div class="form-group">
-        <label for="distance">Distance to travel (optional, in KM):</label>
+        <label for="distance">Distancia do trajeto(opcional, em KM):</label>
         <input type="number" id="distance" step="1">
       </div>
-      <button onclick="calculateCost()">Calculate</button>
+      <button onclick="calculateCost()">Calcular</button>
     </div>
     <div class="result" id="result"></div>
   </div>
