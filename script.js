@@ -15,7 +15,7 @@ function calculateCost() {
     }
 
     // Verifica se o álcool é viável pelo preço
-    const alcoholIsViableByPrice = alcoholPrice <= 0.7 * gasolinePrice;
+    const alcoholIsViableByPrice = alcoholPrice <= 0.75 * gasolinePrice;
 
     // Calcula o custo por km
     const gasolineCostPerKm = gasolinePrice / gasolineKm;
