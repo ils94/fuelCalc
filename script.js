@@ -42,11 +42,11 @@ function calculateCost() {
         <h2>Resultado do Cálculo</h2>
         <div class="fuel-type${alcoholIsViableByPrice ? "" : " highlight"}">
             <div class="name">Gasolina:</div>
-            <div class="cost">Custo por KM: R${gasolineCostPerKm.toFixed(2)}<br>Total: R${totalGasolineCost.toFixed(2)}</div>
+            <div class="cost">Custo por KM: R\$ ${gasolineCostPerKm.toFixed(2)}<br>Total: R\$ ${totalGasolineCost.toFixed(2)}</div>
         </div>
         <div class="fuel-type${alcoholIsViableByPrice ? " highlight" : ""}">
             <div class="name">Álcool:</div>
-            <div class="cost">Custo por KM: R${alcoholCostPerKm.toFixed(2)}<br>Total: R${totalAlcoholCost.toFixed(2)}</div>
+            <div class="cost">Custo por KM: R\$ ${alcoholCostPerKm.toFixed(2)}<br>Total: R\$ ${totalAlcoholCost.toFixed(2)}</div>
         </div>
         <div class="message">${cheaperOption}</div>
     `;
