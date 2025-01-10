@@ -6,7 +6,7 @@ function calculateCost() {
     const distance = parseFloat(document.getElementById('distance').value) || 1;
 
     if (!gasolinePrice || !alcoholPrice || !gasolineKm || !alcoholKm) {
-        document.getElementById('result').innerHTML = `<div class="message">Please fill out all required fields!</div>`;
+        document.getElementById('result').innerHTML = `<div class="message">Preencha os campos necessários!</div>`;
         return;
     }
 
