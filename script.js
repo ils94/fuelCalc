@@ -5,8 +5,12 @@ function calculateCost() {
     const alcoholKm = parseFloat(document.getElementById('alcoholKm').value);
     const distance = parseFloat(document.getElementById('distance').value) || 1;
 
+    const resultDiv = document.getElementById('result');
+    resultDiv.classList.add('hidden'); // Hide result initially
+
     if (!gasolinePrice || !alcoholPrice || !gasolineKm || !alcoholKm) {
-        document.getElementById('result').innerHTML = `<div class="message">Preencha os campos necessários!</div>`;
+        resultDiv.innerHTML = `<div class="message">Preencha os campos necessários!</div>`;
+        resultDiv.classList.remove('hidden'); // Show result with error message
         return;
     }
 
@@ -20,30 +24,31 @@ function calculateCost() {
     const totalAlcoholCost = alcoholCostPerKm * distance;
 
     // Determine the better option
-let cheaperOption = "";
-if (alcoholIsViableByPrice) {
-    cheaperOption = `
-        Álcool é melhor levando em consideração a 
-        <a href="https://www.rotaexata.com.br/blog/etanol/#:~:text=Basta%20fazer%20um%20c%C3%A1lculo%20b%C3%A1sico,70%25%20do%20pre%C3%A7o%20da%20gasolina." target="_blank" rel="noopener noreferrer">regra dos 70%</a>.
-    `;
-} else {
-    cheaperOption = `
-        Gasolina é melhor levando em consideração a 
-        <a href="https://www.rotaexata.com.br/blog/etanol/#:~:text=Basta%20fazer%20um%20c%C3%A1lculo%20b%C3%A1sico,70%25%20do%20pre%C3%A7o%20da%20gasolina." target="_blank" rel="noopener noreferrer">regra dos 70%</a>.
-    `;
-}
+    let cheaperOption = "";
+    if (alcoholIsViableByPrice) {
+        cheaperOption = `
+            Álcool é melhor levando em consideração a 
+            <a href="https://www.rotaexata.com.br/blog/etanol/#:~:text=Basta%20fazer%20um%20c%C3%A1lculo%20b%C3%A1sico,70%25%20do%20pre%C3%A7o%20da%20gasolina." target="_blank" rel="noopener noreferrer">regra dos 70%</a>.
+        `;
+    } else {
+        cheaperOption = `
+            Gasolina é melhor levando em consideração a 
+            <a href="https://www.rotaexata.com.br/blog/etanol/#:~:text=Basta%20fazer%20um%20c%C3%A1lculo%20b%C3%A1sico,70%25%20do%20pre%C3%A7o%20da%20gasolina." target="_blank" rel="noopener noreferrer">regra dos 70%</a>.
+        `;
+    }
 
     // Display results
-    document.getElementById('result').innerHTML = `
+    resultDiv.innerHTML = `
         <h2>Resultado do Cálculo</h2>
         <div class="fuel-type${alcoholIsViableByPrice ? "" : " highlight"}">
             <div class="name">Gasolina:</div>
-            <div class="cost">Custo por KM: R${gasolineCostPerKm.toFixed(2)}<br>Total: $${totalGasolineCost.toFixed(2)}</div>
+            <div class="cost">Custo por KM: R${gasolineCostPerKm.toFixed(2)}<br>Total: R${totalGasolineCost.toFixed(2)}</div>
         </div>
         <div class="fuel-type${alcoholIsViableByPrice ? " highlight" : ""}">
             <div class="name">Álcool:</div>
-            <div class="cost">Custo por KM: R${alcoholCostPerKm.toFixed(2)}<br>Total: $${totalAlcoholCost.toFixed(2)}</div>
+            <div class="cost">Custo por KM: R${alcoholCostPerKm.toFixed(2)}<br>Total: R${totalAlcoholCost.toFixed(2)}</div>
         </div>
         <div class="message">${cheaperOption}</div>
     `;
+    resultDiv.classList.remove('hidden'); // Show result after calculation
 }
