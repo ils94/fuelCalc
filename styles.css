@@ -138,6 +138,13 @@ button:active {
   font-weight: bold;
 }
 
+/* Hidden Class */
+.hidden {
+  display: none !important; /* Completely hides the element */
+  visibility: hidden;
+  opacity: 0;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   body {
